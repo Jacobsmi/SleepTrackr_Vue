@@ -1,5 +1,6 @@
 <template>
   <div id='home-background'>
+      <div id='tag-line'>Are you ready to revolutionize your sleep?</div>
       <div id='home-login'>
           <div id='signup-text'>Sign up now to start the journey</div>
           <input id='firstname' type='text' placeholder="First Name">
@@ -14,24 +15,27 @@
 </template>
 
 <script>
+import './signUpCheck.js'
+import signUpCheck from './signUpCheck.js'
 export default {
     name: 'LandPage',
     mounted(){
         console.log("Width", window.innerWidth)
         this.$nextTick(()=>{
-            if(window.innerWidth < 1500){
+            if(window.innerWidth < 1500 && window.innerWidth > 850){
                 this.mediumConfig()
             }
         })
     },
     methods: {
+        // At 850 we need a small config
         mediumConfig() {
             document.getElementById('home-login').style.height = '45vh'
             document.getElementById('home-login').style.width = '28vw'
-            document.getElementById('bottom-text').style.left = '15%'
+            document.getElementById('bottom-text').style.marginTop = '12vh'
         },
         signUpClicked (){
-            console.log("The sign up button was clicked")
+            signUpCheck(document.getElementById('firstname').value,document.getElementById('lastname').value,document.getElementById('email').value)
         }
     }
 }
@@ -39,9 +43,19 @@ export default {
 
 <style scoped>
 #home-background{
+    font-family: 'Roboto', sans-serif;
     height: 92vh;
     width: 100vw;
-    background-color: #03045e;
+    background-image: url("../../assets/Bedroom.jpg");
+    background-size: 100vw 92vh;
+}
+#tag-line{
+    position: absolute;
+    top: 25vh;
+    left: 20vw;
+    font-size: 5vh;
+    font-weight: bold;
+    width: 25vw;
 }
 #home-login{
     position: absolute;
@@ -49,20 +63,19 @@ export default {
     left: 60vw;
     height: 35vh;
     width: 26vw;
-    background-color: #0077b6;
+    background-color: #17183B;
     border-radius: 2vh;
 }
 #signup-text{
-    position: relative;
-    top: 3vh;
-    margin-left: 15%;
+    margin-top: 2vh;
+    text-align: center;
     color: white;
     font-size: 3vh;
 }
 #firstname{
     width: 8vw;
     height: 3vh;
-    margin-top: 6vh;
+    margin-top: 5vh;
     margin-left: 15%;
     border-radius: 5px;
 }
@@ -78,21 +91,37 @@ export default {
     margin-left: 15%;
     border-radius: 5px;
 }
-#submitButton{
+#submitButton {
     width: 19vw;
-    height: 3vh;
+    height: 5vh;
     margin-left: 15%;
-    border-radius: 1vh;
-    transition-duration: 0.5s;
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
 }
-#submitButton:hover{
-    background-color: #A3CEF1;
+#submitButton:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+#submitButton:active {
+	position:relative;
+	top:1px;
 }
 #bottom-text{
     color: white;
-    position: absolute;
-    bottom: 0;
-    left: 20%;
+    margin-top: 6vh;
+    font-size: 1.5vh;
+    text-align: center;
 }
 #bottom-text a{
     color: white;
