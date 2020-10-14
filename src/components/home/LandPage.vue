@@ -15,19 +15,21 @@
 </template>
 
 <script>
-import './signUpCheck.js'
-import signUpCheck from './signUpCheck.js'
+import router from '../../router/index'
+import setCookie from './setCookie'
+
 export default {
     name: 'LandPage',
     mounted(){
-        console.log("Width", window.innerWidth)
-        console.log("Height", window.innerHeight)
         this.$nextTick(()=>{
         })
     },
     methods: {
         signUpClicked (){
-            signUpCheck(document.getElementById('firstname').value,document.getElementById('lastname').value,document.getElementById('email').value)
+            setCookie("firstName", document.getElementById("firstname").value);
+            setCookie("lastName", document.getElementById("lastname").value);
+            setCookie("email", document.getElementById("email").value);
+            router.push('register');
         }
     }
 }

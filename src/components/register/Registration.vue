@@ -10,7 +10,7 @@
         <input id='password' class='left' style='width: 10vw;' type='text' placeholder="Password"> 
         <input id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
         <br>
-        <button id='submitButton'>Sign Up</button>
+        <button @click = 'signUpClicked' id='submitButton'>Sign Up</button>
       </div>
   </div>
 </template>
@@ -29,6 +29,13 @@ export default {
                 document.getElementById('email').value = info[2]
             }
         })
+    },
+    methods: {
+        signUpClicked: ()=> {
+            /*var firstName = document.getElementById('firstname').value
+            var lastName = document.getElementById('lastname').value
+            var email = document.getElementById('email').value*/
+        }
     }
 }
 </script>
