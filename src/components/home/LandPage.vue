@@ -21,19 +21,11 @@ export default {
     name: 'LandPage',
     mounted(){
         console.log("Width", window.innerWidth)
+        console.log("Height", window.innerHeight)
         this.$nextTick(()=>{
-            if(window.innerWidth < 1500 && window.innerWidth > 850){
-                this.mediumConfig()
-            }
         })
     },
     methods: {
-        // At 850 we need a small config
-        mediumConfig() {
-            document.getElementById('home-login').style.height = '45vh'
-            document.getElementById('home-login').style.width = '28vw'
-            document.getElementById('bottom-text').style.marginTop = '12vh'
-        },
         signUpClicked (){
             signUpCheck(document.getElementById('firstname').value,document.getElementById('lastname').value,document.getElementById('email').value)
         }
@@ -61,7 +53,7 @@ export default {
     position: absolute;
     top: 25vh;
     left: 60vw;
-    height: 35vh;
+    height: auto;
     width: 26vw;
     background-color: #17183B;
     border-radius: 2vh;
@@ -93,7 +85,6 @@ export default {
 }
 #submitButton {
     width: 19vw;
-    height: 5vh;
     margin-left: 15%;
 	box-shadow:inset 0px -3px 7px 0px #29bbff;
 	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
@@ -119,7 +110,7 @@ export default {
 }
 #bottom-text{
     color: white;
-    margin-top: 6vh;
+    margin-top: 3vh;
     font-size: 1.5vh;
     text-align: center;
 }

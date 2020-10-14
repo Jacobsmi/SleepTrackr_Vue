@@ -2,13 +2,13 @@
   <div id='registration'>
       <div id='registration-box'>
       <div id='header'>Register</div>
-        <input id='firstname' class='left' type='text' placeholder="First Name">
-        <input id='lastname' type='text' placeholder="Last Name">
+        <input id='firstname' class='left' style='width: 10vw;' type='text' placeholder="First Name">
+        <input id='lastname' type='text' style='width: 10vw;' placeholder="Last Name">
         <br>
-        <input id='email' class='left' type='text' placeholder="E-Mail"> 
+        <input id='email' class='left' style='width: 21.5vw;' type='text' placeholder="E-Mail"> 
         <br>
-        <input id='password' class='left' type='text' placeholder="Password"> 
-        <input id='confirmPassword' type='text' placeholder="Confirm Password">  
+        <input id='password' class='left' style='width: 10vw;' type='text' placeholder="Password"> 
+        <input id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
         <br>
         <button id='submitButton'>Sign Up</button>
       </div>
@@ -16,11 +16,18 @@
 </template>
 
 <script>
+import getCookieInfo from './getCookieInfo'
 export default {
     name: 'Registration',
     mounted (){
         this.$nextTick(()=>{
-            console.log(document.cookie)
+            var info = getCookieInfo();
+            if (Array.isArray(info)){
+                console.log("Cookie not empty; Regstration")
+                document.getElementById('firstname').value = info[0]
+                document.getElementById('lastname').value = info[1]
+                document.getElementById('email').value = info[2]
+            }
         })
     }
 }
@@ -49,7 +56,6 @@ export default {
     height: 3vh;
     margin-top: 2vh;
     margin-right: 1vw;
-    width: 10vw;
 
 }
 .left{

@@ -1,5 +1,8 @@
 import router from '../../router/index'
+import setCookie from './setCookie'
 export default function (firstName, lastName, email){
-    document.cookie = `fn=${firstName}, ln=${lastName}, email=${email}`;
+    setCookie("firstName", firstName);
+    setCookie("lastName", lastName);
+    setCookie("email", email);
     router.push('register');
 }
