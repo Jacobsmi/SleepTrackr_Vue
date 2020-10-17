@@ -9,9 +9,10 @@
         <input id='email' class='left' style='width: 21.5vw;' type='text' placeholder="E-Mail"> 
         <br>
         <div id='email-error' class='errors'></div> 
-        <input id='password' class='left' style='width: 10vw;' type='text' placeholder="Password"> 
-        <input id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
+        <input @focus='passFocus' id='password' class='left' style='width: 10vw;' type='text' placeholder="Password"> 
+        <input @focus='confirmFocus' id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
         <br>
+        <div id='password-errors'></div>
         <button @click = 'signUpClicked' id='submitButton'>Sign Up</button>
       </div>
   </div>
@@ -20,13 +21,13 @@
 <script>
 import getCookieInfo from './getCookieInfo'
 import checkSignUpValues from './checkSignUpValues'
+import processSignUp from './processSignUp'
 export default {
     name: 'Registration',
     mounted (){
         this.$nextTick(()=>{
             var info = getCookieInfo();
             if (Array.isArray(info)){
-                console.log("Cookie not empty; Regstration")
                 document.getElementById('firstname').value = info[0]
                 document.getElementById('lastname').value = info[1]
                 document.getElementById('email').value = info[2]
@@ -34,23 +35,34 @@ export default {
         })
     },
     methods: {
-        signUpClicked: ()=> {
+        // Method that is called when the signup button is clicked
+        signUpClicked: async ()=> {
+            // Resets any errors that may have existed previously
             document.getElementById("name-errors").innerHTML = ""
             document.getElementById("email-error").innerHTML = ""
+            // Gets values from the form
             var firstName = document.getElementById('firstname').value
             var lastName = document.getElementById('lastname').value
             var email = document.getElementById('email').value
-            var errors = checkSignUpValues(firstName, lastName, email)
-            if (errors[0] === false && errors[1] === false){
-                document.getElementById("name-errors").innerHTML = 'First and Last name are invalid'
-            }else if(errors[0] === false){
-                document.getElementById("name-errors").innerHTML = 'First name is invalid'
-            }else if(errors[1] === false){
-                document.getElementById("name-errors").innerHTML = 'Last name is not valid'
+            // Calls the checkSignUpValues and checks the variables for errors and then gets any error messages as return
+            var errorMessages = checkSignUpValues(firstName, lastName, email)
+            // Checks to see if there are an errors and then displays if there are
+            if(errorMessages !== null){
+                document.getElementById("name-errors").innerHTML = errorMessages[0]
+                document.getElementById("email-error").innerHTML = errorMessages[1]
             }
-            if(errors[2] === false){
-                document.getElementById("email-error").innerHTML = 'Email is not valid'
+            // If there are no errors in the data provided
+            else{
+                // Make a call to the API
+                await processSignUp(firstName, lastName, email)
             }
+        },
+
+        passFocus: ()=>{
+            document.getElementById("password").type = 'password'
+        },
+        confirmFocus: ()=>{
+            document.getElementById("confirmPassword").type = 'password'
         }
     }
 }
