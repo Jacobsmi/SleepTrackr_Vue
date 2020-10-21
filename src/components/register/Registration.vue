@@ -44,8 +44,10 @@ export default {
             var firstName = document.getElementById('firstname').value
             var lastName = document.getElementById('lastname').value
             var email = document.getElementById('email').value
+            var pass = document.getElementById('password').value
+            var confirmPass = document.getElementById('confirmPassword').value
             // Calls the checkSignUpValues and checks the variables for errors and then gets any error messages as return
-            var errorMessages = checkSignUpValues(firstName, lastName, email)
+            var errorMessages = checkSignUpValues(firstName, lastName, email, pass, confirmPass)
             // Checks to see if there are an errors and then displays if there are
             if(errorMessages !== null){
                 document.getElementById("name-errors").innerHTML = errorMessages[0]
@@ -54,7 +56,7 @@ export default {
             // If there are no errors in the data provided
             else{
                 // Make a call to the API
-                await processSignUp(firstName, lastName, email)
+                await processSignUp(firstName, lastName, email, pass)
             }
         },
 

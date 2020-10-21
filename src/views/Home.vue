@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <LandPage />
+      <HomePage />
   </div>
 </template>
 
 <script>
-import LandPage from '@/components/home/LandPage'
+import HomePage from '@/components/home/HomePage'
 
 export default {
   name: 'Home',
   components: {
-    LandPage
+      HomePage
   }
 }
 </script>
