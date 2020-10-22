@@ -12,7 +12,7 @@
         <input @focus='passFocus' id='password' class='left' style='width: 10vw;' type='text' placeholder="Password"> 
         <input @focus='confirmFocus' id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
         <br>
-        <div id='password-errors'></div>
+        <div id='password-errors' class='errors'></div>
         <button @click = 'signUpClicked' id='submitButton'>Sign Up</button>
       </div>
   </div>
@@ -52,6 +52,7 @@ export default {
             if(errorMessages !== null){
                 document.getElementById("name-errors").innerHTML = errorMessages[0]
                 document.getElementById("email-error").innerHTML = errorMessages[1]
+                document.getElementById("password-errors").innerHTML = errorMessages[2]
             }
             // If there are no errors in the data provided
             else{

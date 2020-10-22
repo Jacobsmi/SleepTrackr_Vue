@@ -1,3 +1,4 @@
+import router from '../../router/index'
 export default (firstName, lastName, email, pass) =>{
     
     var data = JSON.stringify({
@@ -13,8 +14,11 @@ export default (firstName, lastName, email, pass) =>{
     signUpRequest.send(data);
     signUpRequest.onload = () => {
         if (signUpRequest.status === 200){
-            //var signUpRequestJson = JSON.parse(signUpRequest.response)
-            //router.push('home')
+            var signUpRequestJson = JSON.parse(signUpRequest.response)
+            if (signUpRequestJson.status === 'success'){
+                // Setting cookie on login
+                router.push('home')
+            }
         }else{
             console.log("Error making the request to API")
         }
