@@ -15,13 +15,13 @@ export default (firstName, lastName, email, pass) =>{
     signUpRequest.onload = () => {
         if (signUpRequest.status === 200){
             var signUpRequestJson = JSON.parse(signUpRequest.response)
-            if (signUpRequestJson.status === 'success'){
-                // Setting cookie on login
-                router.push('home')
-            }else if(signUpRequestJson.status === 'failure'){
+            if(signUpRequestJson.status === 'failure'){
                 if(signUpRequestJson.error === 'duplicate_email'){
                     document.getElementById('other-errors').innerHTML = 'An account with this email already exists'
                 }
+            }else{
+                document.cookie = JSON.stringify(signUpRequestJson)
+                router.push('home')
             }
         }else{
             console.log("Error making the request to API")

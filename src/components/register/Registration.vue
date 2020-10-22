@@ -41,6 +41,8 @@ export default {
             // Resets any errors that may have existed previously
             document.getElementById("name-errors").innerHTML = ""
             document.getElementById("email-error").innerHTML = ""
+            document.getElementById("password-errors").innerHTML = ""
+            document.getElementById("other-errors").innerHTML = ""
             // Gets values from the form
             var firstName = document.getElementById('firstname').value
             var lastName = document.getElementById('lastname').value
