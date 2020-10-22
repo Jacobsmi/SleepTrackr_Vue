@@ -18,6 +18,10 @@ export default (firstName, lastName, email, pass) =>{
             if (signUpRequestJson.status === 'success'){
                 // Setting cookie on login
                 router.push('home')
+            }else if(signUpRequestJson.status === 'failure'){
+                if(signUpRequestJson.error === 'duplicate_email'){
+                    document.getElementById('other-errors').innerHTML = 'An account with this email already exists'
+                }
             }
         }else{
             console.log("Error making the request to API")

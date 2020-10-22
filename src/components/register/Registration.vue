@@ -13,6 +13,7 @@
         <input @focus='confirmFocus' id='confirmPassword' style='width: 10vw;' type='text' placeholder="Confirm Password">  
         <br>
         <div id='password-errors' class='errors'></div>
+        <div id='other-errors' class="errors"></div>
         <button @click = 'signUpClicked' id='submitButton'>Sign Up</button>
       </div>
   </div>
