@@ -20,7 +20,7 @@ export default (firstName, lastName, email, pass) =>{
                     document.getElementById('other-errors').innerHTML = 'An account with this email already exists'
                 }
             }else{
-                document.cookie = JSON.stringify(signUpRequestJson)
+                document.cookie = ('access_token='+signUpRequestJson.access_token +';')
                 router.push('home')
             }
         }else{
