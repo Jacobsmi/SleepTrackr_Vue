@@ -2,10 +2,14 @@ export default () =>{
     if (document.cookie === ""){
         return null
     }
-    var parts = document.cookie.split(';');
-    var firstName = parts[0].split("=")[1]
-    var lastName = parts[1].split("=")[1]
-    var email = parts[2].split("=")[1]
-    return [firstName, lastName, email]
+    var cookieData = {}
+    var cookies = document.cookie.split(';')
+    cookies.forEach(cookie =>{
+        var cookieParts = cookie.split('=')
+        var cookieName = cookieParts[0].replace(' ','')
+        cookieName = cookieName.replace('"','')
+        cookieData[cookieName] = cookieParts[1]
+    })
+    return [cookieData.firstName, cookieData.lastName, cookieData.email]
     
 }

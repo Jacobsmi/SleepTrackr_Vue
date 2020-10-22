@@ -5,11 +5,13 @@
 </template>
 
 <script>
+import getUserInfo from './getUserInfo'
 export default {
     name: 'HomePage',
     mounted() {
       this.$nextTick(() => {
-        console.log(document.cookie.access_token)
+        console.log("Calling get user info")
+        getUserInfo()
       });
 	},
 }
