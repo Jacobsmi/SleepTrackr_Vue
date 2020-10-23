@@ -45,5 +45,6 @@ export default (firstName, lastName, email, pass, confirmPass) =>{
         errorMessages[2] = 'Passwords do not match'
     }
 
-    return errorMessages
+    //return errorMessages
+    return null
 }
