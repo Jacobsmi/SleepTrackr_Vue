@@ -1,4 +1,4 @@
-export default () => {
+export default async () => {
     // Parse the access token out of the cookie and 
     var access_token = "" 
     var cookies = document.cookie.split(';')
@@ -10,19 +10,16 @@ export default () => {
         }
     })
 
-    var basicInfoRequest = new XMLHttpRequest()
-    basicInfoRequest.open("GET", "http://localhost:5000/protected")
-    basicInfoRequest.setRequestHeader('Authorization', 'Bearer ' + access_token)
-    basicInfoRequest.send()
-    basicInfoRequest.onload = () => {
-        var basicInfoRequestJSON = JSON.parse(basicInfoRequest.response)
-        console.log(basicInfoRequestJSON)
-        if(basicInfoRequestJSON.msg){
-            if(basicInfoRequestJSON.msg === 'Token has expired'){
-                console.log("The token has expired")
-            }
-        }else if(basicInfoRequestJSON.logged_in_as){
-            console.log("The user is logged in")
+    const resp = await fetch('http://localhost:5000/basicuserinfo', {
+        headers: {
+            'Authorization': 'Bearer ' + access_token
         }
+    })
+    if (resp.ok){
+        const respJSON = await resp.json()
+        return respJSON
+    }
+    else{
+        return null
     }
 }

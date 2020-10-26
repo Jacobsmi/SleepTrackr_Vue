@@ -1,19 +1,24 @@
 <template>
   <div id='homepage'>
-      Welcome to SleepTrackr!
+      <div id='welcome-message'>Welcome to the SleepTrackr, {{ name }}</div>
   </div>
 </template>
 
 <script>
 import getUserInfo from './getUserInfo'
 export default {
-    name: 'HomePage',
-    mounted() {
-      this.$nextTick(() => {
-        console.log("Calling get user info")
-        getUserInfo()
-      });
-	},
+  name: 'HomePage',
+  data (){
+    return{
+      name: "",
+    }
+  },
+  async mounted() {
+    const userInfo = await getUserInfo()
+    if(userInfo !== null){
+      this.name = userInfo.firstName
+    }
+  },
 }
 </script>
 
