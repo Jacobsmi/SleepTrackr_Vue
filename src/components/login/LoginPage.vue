@@ -26,6 +26,9 @@ export default {
             document.getElementById("passInput").type = 'password'
         },
         async login(){
+            this.emailErrors = ""
+            this.passwordErrors = ""
+            this.otherErrors = ""
             var email = document.getElementById('emailInput').value
             var pass = document.getElementById('passInput').value
             var errors = await processLogin(email, pass)

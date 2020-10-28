@@ -14,7 +14,6 @@ export default async (email, password)=>{
         if (!passResult){
             errors[1] = "Password is not valid"
         }
-        return errors
     }else{
         // If all values look valid make a call to the API
         const resp = await fetch('http://localhost:5000/login',{
@@ -28,8 +27,19 @@ export default async (email, password)=>{
             })
         })
         const respJSON = await resp.json()
-        console.log(respJSON)
-        return null
+        if(respJSON.error){
+            console.log(respJSON.error)
+            if(respJSON.error === 'no_existing_user'){
+                errors[2]='There is no user with that E-Mail!'
+            }else if(respJSON.error === 'wrong_pass'){
+                console.log("Wrong Password")
+                errors[2]='Password is incorrect'
+            }
+        }else{
+            console.log("Sign in successful")
+            return null
+        }
+    return errors
     }
     
 }
