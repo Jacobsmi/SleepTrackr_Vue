@@ -1,3 +1,4 @@
+import router from '../../router/index'
 export default async (email, password)=>{
     // Create regex patterns for email and password
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -21,6 +22,7 @@ export default async (email, password)=>{
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 email:email,
                 pass:password
@@ -28,16 +30,15 @@ export default async (email, password)=>{
         })
         const respJSON = await resp.json()
         if(respJSON.error){
-            console.log(respJSON.error)
             if(respJSON.error === 'no_existing_user'){
-                errors[2]='There is no user with that E-Mail!'
-            }else if(respJSON.error === 'wrong_pass'){
-                console.log("Wrong Password")
+                errors[2]='No user with that E-Mail'
+            }else if(respJSON.error === 'wrong_pass'){           
                 errors[2]='Password is incorrect'
             }
         }else{
-            console.log("Sign in successful")
-            return null
+            document.cookie = ('access_token='+respJSON.access_token +';')
+            router.push('home')
+            return null	
         }
     return errors
     }

@@ -15,6 +15,7 @@ export default {
   },
   async mounted() {
     const userInfo = await getUserInfo()
+    console.log(userInfo)
     if(userInfo !== null){
       this.name = userInfo.firstName
     }
