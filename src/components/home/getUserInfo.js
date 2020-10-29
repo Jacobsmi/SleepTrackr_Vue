@@ -9,7 +9,6 @@ export default async () => {
             access_token = cookieParts[1]
         }
     })
-
     const resp = await fetch('http://localhost:5000/basicuserinfo', {
         headers: {
             'Authorization': 'Bearer ' + access_token
